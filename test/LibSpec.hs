@@ -1,0 +1,51 @@
+-- # LibSpec
+-- テストコードの雛形
+-- 
+-- ## 言語拡張と`module`宣言
+--
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE GHC2024 #-}
+{-# LANGUAGE ImplicitParams #-}
+{-# LANGUAGE ImportQualifiedPost #-}
+{-# LANGUAGE LexicalNegation #-}
+{-# LANGUAGE LambdaCase, MultiWayIf #-}
+{-# LANGUAGE NPlusKPatterns #-}
+{-# LANGUAGE DataKinds, PolyKinds, NoStarIsType, TypeFamilyDependencies #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedRecordDot, NoFieldSelectors, DuplicateRecordFields #-}
+module LibSpec
+  ( spec
+  ) where
+
+import Data.String
+import qualified Codec.Binary.UTF8.String as U
+import qualified Data.ByteString as B
+import Test.Main
+import Test.Hspec
+import Text.Show.Unicode
+import Lib
+
+newtype UString a = UString a deriving Eq
+
+ustring :: B.ByteString -> UString String
+ustring = UString . U.decode . B.unpack
+
+instance IsString a => IsString (UString a) where
+    fromString :: IsString a => String -> UString a
+    fromString = UString . fromString
+  
+instance Show a => Show (UString a) where
+    show :: Show a => UString a -> String
+    show (UString s) = ushow s
+
+spec :: Spec
+spec = do 
+    { describe "someFunc" $ do
+        { it "「なんか関数」を標準出力に印字する." $ do
+            { result <- captureProcessResult Lib.someFunc
+            ; prExitCode result `shouldBe` ExitSuccess
+            ; prStderr result `shouldSatisfy` B.null
+            ; ustring (prStdout result) `shouldBe` "なんか関数\n"
+            }
+        }
+    }
