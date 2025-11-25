@@ -20,7 +20,11 @@ module Lambda.Term
 --
 import Data.Functor.Foldable
 import Text.ParserCombinators.ReadP
-import Expression
+import Expression.Variable
+import Expression.MSiki
+{- $setup
+>>> :seti -XOverloadedStrings
+-}
 --
 -- ## 項とプログラム
 --
