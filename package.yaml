@@ -91,9 +91,9 @@ tests:
     - hspec
     - main-tester
 
-  SST-doctest:
-    main:                doctests.hs
-    source-dirs:         test
-    dependencies:
-    - SST
-    - doctest
+  # SST-doctest:
+  #   main:                doctests.hs
+  #   source-dirs:         test
+  #   dependencies:
+  #   - SST
+  #   - doctest

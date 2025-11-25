@@ -1,0 +1,16 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "SST:lib"
+
+    - path: "./app/Main.hs"
+      component: "SST:exe:SST"
+
+    - path: "./app/Paths_SST.hs"
+      component: "SST:exe:SST"
+
+    - path: "./test"
+      component: "SST:test:SST-doctest"
+
+    - path: "./test"
+      component: "SST:test:SST-test"

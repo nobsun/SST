@@ -101,7 +101,7 @@ qux' = do
 
 soko :: IO ()
 soko = do
-    { chan <- newChan
+    { _chan <- newChan
     ; let { ?msg = timeoutMsg; ?tm = tenSecs }
     ; interacts (map (map toUpper))
     }

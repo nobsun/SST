@@ -13,4 +13,15 @@ module Main where
 import Test.DocTest
 
 main :: IO ()
-main = doctest ["src/Expression/Hosi.hs"]
+main = doctest 
+     ["src/Expression/Hosi.hs"
+     ,"src/Expression/Siki.hs"
+    -- ,"src/Expression/Variable.hs"
+    -- ,"src/Expression/MSiki.hs"
+    --  ,"src/Expression/Lst.hs"
+    --  ,"src/Expression/CSiki.hs"
+    --  ,"src/Expression/SSiki.hs"
+    --  ,"src/Expression/Abstraction.hs"
+    --  ,"src/Expression/Substitution.hs"
+     ]
+
